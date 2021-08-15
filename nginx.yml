@@ -1,0 +1,8 @@
+---
+- hosts: web
+  tasks:
+    - name: Installs nginx web server
+      apt:
+        pkg: nginx
+        state: present
+        update_cache: true

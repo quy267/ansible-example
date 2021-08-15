@@ -1,0 +1,38 @@
+---
+- hosts: all
+  become: true
+  vars:
+    create_containers: 4
+    default_container_name: portainer
+    default_container_image: portainer/portainer
+    default_container_command: sleep 1d
+
+  tasks:
+#    - name: Install aptitude using apt
+#      yum: name=* state=latest
+    - name: Install docker python package on version 4.4.4
+      pip:
+        name: docker
+        extra_args: "--trusted-host=pypi.python.org --trusted-host=pypi.org --trusted-host=files.pythonhosted.org --upgrade"
+
+    - name: Create a volume
+      docker_volume:
+        name: portainer_data
+
+    #  docker container run -d --name portainer -p 8080:9000 \
+    #    --restart=always \
+    #    -v /var/run/docker.sock:/var/run/docker.sock \
+    #    -v portainer_data:/data portainer/portainer
+
+    - name: Start a container
+      docker_container:
+        name: "{{ default_container_name }}"
+        image: "{{ default_container_image }}"
+        command: "{{ default_container_command }}"
+        state: present
+        restart_policy: always
+        ports:
+          - "8080:9000"
+        volumes:
+          - "/var/run/docker.sock:/var/run/docker.sock"
+          - "portainer_data:/data portainer/portainer"

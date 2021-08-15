@@ -1,0 +1,37 @@
+[debian]
+host48 ansible_host=192.168.80.48 ansible_user=root  ansible_password=seta@123
+host25 ansible_host=192.168.80.25 ansible_user=root  ansible_password=seta@123
+
+[ubuntu]
+host32 ansible_host=192.168.80.32 ansible_user=ubuntu ansible_password=seta@123
+host12 ansible_host=192.168.80.12 ansible_user=ubuntu ansible_password=seta@123
+
+
+[blueEye:vars]
+ansible_ssh_private_key_file=/home/ist004/Desktop/SALF/new-salf.pem
+ansible_user=ubuntu
+
+[blueEye]
+stage       ansible_host=52.40.55.252
+production  ansible_host=54.214.111.39
+sentry      ansible_host=34.208.17.244
+
+
+[blueEye:vars]
+ansible_ssh_private_key_file=/home/ist004/Desktop/SALF/new-salf.pem
+ansible_user=ubuntu
+
+[liftUp]
+stage       ansible_host=54.169.190.236
+production  ansible_host=52.221.0.242
+
+[liftUp:vars]
+ansible_ssh_private_key_file=/home/ist004/Desktop/SALF/liftup_server.pem
+ansible_user=ubuntu
+
+
+
+
+
+
+
